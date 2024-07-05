@@ -160,6 +160,10 @@ protected:
     std::vector<std::shared_ptr<FunctionBase>> m_functions;
     std::weak_ptr<MQTTConnector> m_connector;
 
+    virtual std::string getManufacturer() const;
+    virtual std::string getModel() const;
+    virtual std::string getVersion() const;
+
 private:
     friend void MQTTConnector::registerDevice(std::shared_ptr<DeviceBase> device);
     void setParentConnector(std::weak_ptr<MQTTConnector> connector)

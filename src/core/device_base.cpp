@@ -145,9 +145,9 @@ void DeviceBase::sendDiscovery()
         // Add the device info to the discovery json
         discoveryJson["device"] = {{"name", getName()},
                                    {"identifiers", {m_id}},
-                                   {"manufacturer", "Homebrew"},
-                                   {"model", "hass_mqtt_device"},
-                                   {"sw_version", "0.1.0"}};
+                                   {"manufacturer", getManufacturer()},
+                                   {"model", getModel()},
+                                   {"sw_version", getVersion()}};
 
         discoveryParts[discoveryTopic] = discoveryJson;
     }
@@ -165,6 +165,21 @@ void DeviceBase::sendDiscovery()
             throw e;
         }
     }
+}
+
+std::string DeviceBase::getManufacturer() const
+{
+    return "Homebrew";
+}
+
+std::string DeviceBase::getModel() const
+{
+    return "hass_mqtt_device";
+}
+
+std::string DeviceBase::getVersion() const
+{
+    return "0.1.0";
 }
 
 void DeviceBase::processMessage(const std::string& topic, const std::string& payload)
